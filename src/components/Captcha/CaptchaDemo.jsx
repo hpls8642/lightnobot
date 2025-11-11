@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { RefreshCw, X, Check } from "lucide-react";
+import logo from "../../assets/logo.png";
+import sprite from "../../assets/sprite.png";
+import background from "../../assets/tiledbackground2.png";
+
 const TILED_BG_URL = "/tiledbackground2.png";
 
 function randomIntFromInterval(min, max) {
@@ -89,7 +93,7 @@ const CaptchaComponent = () => {
           generateSlotPosition();
         }, 0);
       };
-      img.src = TILED_BG_URL;
+      img.src = background;
     }
   }, [showModal]);
 
@@ -266,7 +270,7 @@ const CaptchaComponent = () => {
             <span className="text-white font-medium">I'm not a robot</span>
           </div>
           <img
-            src="/logo.png"
+            src={logo}
             alt="Service logo"
             width={60}
             height={60}
@@ -317,7 +321,7 @@ const CaptchaComponent = () => {
                 className="relative w-full rounded-lg overflow-hidden border border-white/30 shadow-inner"
                 style={{
                   touchAction: "none",
-                  backgroundImage: `url(${TILED_BG_URL})`,
+                  backgroundImage: `url(${background})`,
                   backgroundSize: "contain",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
@@ -373,7 +377,7 @@ const CaptchaComponent = () => {
                   }}
                 >
                   <img
-                    src="/sprite.png"
+                    src={sprite}
                     alt="Candle"
                     className="w-full h-full object-contain"
                     style={{

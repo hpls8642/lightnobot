@@ -1,3 +1,4 @@
+import Snowfall from "react-snowfall";
 import CaptchaComponent from "./components/Captcha/CaptchaDemo.jsx";
 import Prism from "./components/Prism/Prism.jsx";
 
@@ -5,6 +6,7 @@ export default function App() {
   return (
     <>
       <div className="w-full h-screen relative bg-black flex justify-center items-center">
+        <Snowfall />
         <Prism
           animationType="rotate"
           timeScale={0.5}

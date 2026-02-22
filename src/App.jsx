@@ -1,12 +1,31 @@
 import Snowfall from "react-snowfall";
 import CaptchaComponent from "./components/Captcha/CaptchaDemo.jsx";
 import Prism from "./components/Prism/Prism.jsx";
+import chipsina from "./assets/chipsina.png";
+import chipsina2 from "./assets/chipsina2.png";
+import chipsina3 from "./assets/chipsina3.png";
+
+const snowflake1 = document.createElement("img");
+snowflake1.src = chipsina;
+
+const snowflake2 = document.createElement("img");
+snowflake2.src = chipsina2;
+
+const snowflake3 = document.createElement("img");
+snowflake3.src = chipsina3;
+
+const images = [snowflake1, snowflake2, snowflake3];
 
 export default function App() {
   return (
     <>
       <div className="w-full h-screen relative bg-black flex justify-center items-center">
-        <Snowfall />
+        <Snowfall
+          radius={[40, 60]}
+          speed={[0.5, 1]}
+          snowflakeCount={40}
+          images={images}
+        />
         <Prism
           animationType="rotate"
           timeScale={0.5}

@@ -2,9 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { RefreshCw, X, Check } from "lucide-react";
 import logo from "../../assets/logo.png";
 import sprite from "../../assets/sprite.png";
-import background from "../../assets/tiledbackground2.png";
-
-const TILED_BG_URL = "/tiledbackground2.png";
+import background from "../../assets/tiledbackground2.webp";
+import { LiquidGlass } from "@liquidglass/react";
 
 function randomIntFromInterval(min, max) {
   // min and max included
@@ -238,61 +237,73 @@ const CaptchaComponent = () => {
   return (
     <div className="w-full max-w-md mt-10">
       {/* Checkbox Stage */}
-      <div className="bg-white/10 backdrop-blur-md rounded-lg shadow-lg p-6 pb-4 text-white border border-white/30">
-        <div
-          className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-all ${
-            verified
-              ? "border-green-500"
-              : failed
-              ? "border-red-400 "
-              : "border-white/30 hover:border-gray-400"
-          }`}
-          onClick={handleCheckboxClick}
-        >
-          <div className="flex items-center gap-3">
-            <div
-              className={`w-6 h-6 border-2 rounded flex items-center justify-center transition-all ${
-                verified
-                  ? "bg-green-500 border-green-500 backdrop-blur-md"
-                  : failed
-                  ? "bg-red-500 border-red-500 backdrop-blur-md"
-                  : "border-gray-400"
-              }`}
-            >
-              {isLoading && (
-                <div className="w-4 h-4 border border-white/30 border-t-transparent rounded-full animate-spin" />
-              )}
-              {verified && <Check className="w-4 h-4 text-white" />}
-              {!verified && !isLoading && failed && (
-                <X className="w-4 h-4 text-white" />
-              )}
-            </div>
-            <span className="text-white font-medium">I'm not a robot</span>
-          </div>
-          <img
-            src={logo}
-            alt="Service logo"
-            width={60}
-            height={60}
-            className="opacity-60 object-contain"
-            style={{ display: "block" }}
-          />
-        </div>
-        <div className="flex items-center justify-between mt-2">
-          <div className="text-xs text-gray-300">Privacy • Terms</div>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleRefresh();
-              setShowModal(false);
-            }}
-            className="flex items-center gap-1 px-3 py-1 text-xs text-white hover:text-gray-800 hover:bg-gray-100 rounded transition-colors"
+      <LiquidGlass
+        borderRadius={16}
+        blur={1}
+        contrast={1.2}
+        brightness={1.25}
+        saturation={1.25}
+        zIndex={1}
+        shadowIntensity={0.5}
+        elasticity={0.35}
+        className="border border-white/30"
+      >
+        <div className="p-8 pb-4 text-white w-full">
+          <div
+            className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-all ${
+              verified
+                ? "border-green-500"
+                : failed
+                ? "border-red-400 "
+                : "border-white/30 hover:border-gray-400"
+            }`}
+            onClick={handleCheckboxClick}
           >
-            <RefreshCw className="w-3 h-3" />
-            Restart
-          </button>
+            <div className="flex items-center gap-3">
+              <div
+                className={`w-6 h-6 border-2 rounded flex items-center justify-center transition-all ${
+                  verified
+                    ? "bg-green-500 border-green-500 backdrop-blur-md"
+                    : failed
+                    ? "bg-red-500 border-red-500 backdrop-blur-md"
+                    : "border-gray-400"
+                }`}
+              >
+                {isLoading && (
+                  <div className="w-4 h-4 border border-white/30 border-t-transparent rounded-full animate-spin" />
+                )}
+                {verified && <Check className="w-4 h-4 text-white" />}
+                {!verified && !isLoading && failed && (
+                  <X className="w-4 h-4 text-white" />
+                )}
+              </div>
+              <span className="text-white font-medium">I'm not a robot</span>
+            </div>
+            <img
+              src={logo}
+              alt="Service logo"
+              width={60}
+              height={60}
+              className="opacity-60 object-contain"
+              style={{ display: "block" }}
+            />
+          </div>
+          <div className="flex items-center justify-between mt-2">
+            <div className="text-xs text-gray-300">Privacy • Terms</div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRefresh();
+                setShowModal(false);
+              }}
+              className="flex items-center gap-1 px-3 py-1 text-xs text-white hover:text-gray-800 hover:bg-gray-100 rounded transition-colors"
+            >
+              <RefreshCw className="w-3 h-3" />
+              Restart
+            </button>
+          </div>
         </div>
-      </div>
+      </LiquidGlass>
 
       {/* Puzzle Modal */}
       {showModal && (

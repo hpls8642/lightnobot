@@ -4,6 +4,7 @@ import logo from "../../assets/logo.png";
 import sprite from "../../assets/sprite.png";
 import background from "../../assets/tiledbackground2.webp";
 import { LiquidGlass } from "@liquidglass/react";
+import supabase from "../../supabase";
 
 function randomIntFromInterval(min, max) {
   // min and max included
@@ -61,7 +62,7 @@ const CaptchaComponent = () => {
       const pieceX = Math.max(0, Math.min(pieceXScaled, rect.width - pieceW));
       const pieceYBase = Math.max(
         0,
-        Math.min(pieceYScaled, rect.height - pieceH)
+        Math.min(pieceYScaled, rect.height - pieceH),
       );
       const pieceY = Math.max(0, pieceYBase - mobileShiftY);
       setPiecePosition({ x: pieceX, y: pieceY });
@@ -171,7 +172,7 @@ const CaptchaComponent = () => {
     const isSuccess = dx < tolerance && dy < tolerance;
 
     setIsEvaluating(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       if (isSuccess) {
         setPiecePosition(slotPosition);
         setShowSuccess(true);
@@ -183,6 +184,14 @@ const CaptchaComponent = () => {
           setShowModal(false);
           setShowSuccess(false);
         }, 1000);
+
+        const { data, error } = await supabase.functions.invoke(
+          "increment-counter",
+          {
+            body: { name: "Functions" },
+          },
+        );
+        console.log(data, error);
       } else {
         const remaining = attemptsLeft - 1;
         setAttemptsLeft(remaining);
@@ -250,23 +259,17 @@ const CaptchaComponent = () => {
       >
         <div className="p-8 pb-4 text-white w-full">
           <div
-            className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-all ${
-              verified
-                ? "border-green-500"
-                : failed
-                ? "border-red-400 "
-                : "border-white/30 hover:border-gray-400"
-            }`}
+            className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-all border-white/20 hover:border-gray-400`}
             onClick={handleCheckboxClick}
           >
             <div className="flex items-center gap-3">
               <div
                 className={`w-6 h-6 border-2 rounded flex items-center justify-center transition-all ${
                   verified
-                    ? "bg-green-500 border-green-500 backdrop-blur-md"
+                    ? "bg-custom-gold border-custom-gold backdrop-blur-md"
                     : failed
-                    ? "bg-red-500 border-red-500 backdrop-blur-md"
-                    : "border-gray-400"
+                      ? "bg-red-500 border-red-500 backdrop-blur-md"
+                      : "border-gray-400"
                 }`}
               >
                 {isLoading && (

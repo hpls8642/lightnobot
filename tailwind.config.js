@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        "custom-gold": "#f0c060",
         brand: {
           DEFAULT: "#4f7cff",
           dark: "#3c63d1",

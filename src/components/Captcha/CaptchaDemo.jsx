@@ -11,12 +11,12 @@ function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-const CaptchaComponent = () => {
+const CaptchaComponent = ({ failed, setFailed }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [verified, setVerified] = useState(false);
-  const [failed, setFailed] = useState(false);
+  // const [failed, setFailed] = useState(false);
   const [piecePosition, setPiecePosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [slotPosition, setSlotPosition] = useState({ x: 0, y: 0 });
@@ -266,7 +266,7 @@ const CaptchaComponent = () => {
               <div
                 className={`w-6 h-6 border-2 rounded flex items-center justify-center transition-all ${
                   verified
-                    ? "bg-custom-gold border-custom-gold backdrop-blur-md"
+                    ? "bg-custom-gold/30 border-custom-gold backdrop-blur-md"
                     : failed
                       ? "bg-red-500 border-red-500 backdrop-blur-md"
                       : "border-gray-400"
@@ -275,7 +275,9 @@ const CaptchaComponent = () => {
                 {isLoading && (
                   <div className="w-4 h-4 border border-white/30 border-t-transparent rounded-full animate-spin" />
                 )}
-                {verified && <Check className="w-4 h-4 text-white" />}
+                {verified && (
+                  <Check className="w-4 h-4 text-custom-gold" strokeWidth={4} />
+                )}
                 {!verified && !isLoading && failed && (
                   <X className="w-4 h-4 text-white" />
                 )}

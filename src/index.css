@@ -20,3 +20,29 @@ body {
 html {
   @apply font-heading;
 }
+
+.fire {
+  background-image:
+    url("./assets/noise.jpg"), url("./assets/noise.jpg"),
+    linear-gradient(#fff, #999);
+  background-blend-mode: difference, difference, normal;
+  filter: sepia(1) contrast(3.5);
+  animation: sliding 5s linear infinite;
+  height: 100%;
+  width: 100%;
+}
+
+@keyframes sliding {
+  from {
+    background-position:
+      1536px 9216px,
+      0 7168px,
+      0 0;
+  }
+  to {
+    background-position:
+      512px 0,
+      1024px 0,
+      0 0;
+  }
+}

@@ -1,6 +1,7 @@
 import Snowfall from "react-snowfall";
 import CaptchaComponent from "./components/Captcha/CaptchaDemo.jsx";
 import Prism from "./components/Prism/Prism.jsx";
+import ColorBends from "./components/ColorBends/ColorBends.jsx";
 import chipsina from "./assets/chipsina.png";
 import chipsina2 from "./assets/chipsina2.png";
 import chipsina3 from "./assets/chipsina3.png";
@@ -20,6 +21,7 @@ const images = [snowflake1, snowflake2, snowflake3];
 
 export default function App() {
   const [totalHumans, setTotalHumans] = useState(0);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     const getUserStars = async () => {
@@ -64,17 +66,34 @@ export default function App() {
           snowflakeCount={40}
           images={images}
         />
-        <Prism
-          animationType="rotate"
-          timeScale={0.5}
-          height={3.5}
-          baseWidth={5.5}
-          scale={3.6}
-          hueShift={0}
-          colorFrequency={1}
-          noise={0}
-          glow={1}
-        />
+        {!failed ? (
+          <ColorBends
+            rotation={90}
+            speed={0.2}
+            scale={2}
+            frequency={1}
+            warpStrength={1}
+            mouseInfluence={1}
+            parallax={0.5}
+            noise={0.1}
+            transparent
+            autoRotate={2}
+            color=""
+          />
+        ) : (
+          // <Prism
+          //   animationType="rotate"
+          //   timeScale={0.5}
+          //   height={3.5}
+          //   baseWidth={5.5}
+          //   scale={3.6}
+          //   hueShift={0}
+          //   colorFrequency={1}
+          //   noise={0}
+          //   glow={1}
+          // />
+          <div className="fire" />
+        )}
         <div className="absolute flex flex-col justify-center items-center p-4">
           <h1 className="text-white xl:text-7xl text-5xl tracking-tight font-heading mb-2">
             Light<span className="text-custom-gold">No</span>Bot
@@ -83,16 +102,25 @@ export default function App() {
             Where divine precision meets human touch. Light the candle, and the
             doors will open.
           </p>
-          <p className="mt-3 text-slate-200 text-center sm:text-xl max-w-2xl mx-auto font-sans">
-            <span className="text-white">{totalHumans}</span> Humans Verified
+          <CaptchaComponent failed={failed} setFailed={setFailed} />
+          <p className="mt-8 text-slate-200 text-center sm:text-xl max-w-2xl mx-auto font-sans">
+            <span className="text-white font-extrabold text-xl">
+              {totalHumans}
+            </span>{" "}
+            Humans have been verified
           </p>
-          <CaptchaComponent />
         </div>
-        <footer className="absolute bottom-2">
+        <footer className="absolute bottom-2 flex justify-center items-center gap-1 flex-wrap">
           <p className="text-slate-500 sm:text-sm text-xs">
             © 2026 • <span className="text-slate-400">BearSpark Solutions</span>{" "}
-            • All rights reserved.
+            • All rights reserved |{" "}
           </p>
+          <a
+            href="https://hpls8642.github.io/project-perseids/"
+            className="text-slate-400 sm:text-sm text-xs hover:text-slate-100 hover:underline"
+          >
+            Project Perseids
+          </a>
         </footer>
       </div>
     </>

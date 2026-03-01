@@ -59,7 +59,7 @@ export default function App() {
   }, []);
   return (
     <>
-      <div className="w-full h-screen relative bg-black flex justify-center items-center flex-col">
+      <div className="w-full h-svh relative bg-black flex justify-center items-center flex-col">
         <Snowfall
           radius={[40, 60]}
           speed={[0.5, 1]}
@@ -110,7 +110,7 @@ export default function App() {
             Humans have been verified
           </p>
         </div>
-        <footer className="absolute bottom-2 flex justify-center items-center gap-1 flex-wrap">
+        <footer className="absolute bottom-5 sm:bottom-2 flex justify-center items-center gap-1 flex-wrap">
           <p className="text-slate-500 sm:text-sm text-xs">
             © 2026 • <span className="text-slate-400">BearSpark Solutions</span>{" "}
             • All rights reserved |{" "}
